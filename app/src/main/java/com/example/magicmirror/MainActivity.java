@@ -15,6 +15,7 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ImageView;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 
 
@@ -47,6 +48,17 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    //卡通按钮点击事件
+    public void cartoon(View view) {
+        if(!isImageExsit()){
+            return;
+        }
+        ByteArrayOutputStream baos=new ByteArrayOutputStream();
+        img.compress(Bitmap.CompressFormat.JPEG,80,baos);
+//        DetectResponse response=null;
+//        new FaceUtils().beauty_face(this,baos.toByteArray());
+    }
+
 
 
     @Override
@@ -73,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
-
 
     //判断图片是否存在
     private Boolean isImageExsit(){

@@ -47,6 +47,16 @@
         app:layout_constraintTop_toTopOf="@+id/button" />
 
     <Button
+        android:onClick="cartoon"
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginBottom="16dp"
+        android:text="Cartoon"
+        app:layout_constraintBottom_toTopOf="@+id/button7"
+        app:layout_constraintStart_toStartOf="@+id/button" />
+
+    <Button
         android:id="@+id/button9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -83,14 +93,7 @@
         app:layout_constraintGuide_percent="0.50121653" />
 
 
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginBottom="16dp"
-        android:text="Button"
-        app:layout_constraintBottom_toTopOf="@+id/button7"
-        app:layout_constraintStart_toStartOf="@+id/button" />
+
 
     <Button
         android:id="@+id/button7"
