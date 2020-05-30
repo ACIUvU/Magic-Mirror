@@ -87,6 +87,23 @@
         app:layout_constraintStart_toStartOf="@+id/button4" />
 
 
+
+    <Button
+        android:onClick="partLengthen"
+        android:id="@+id/button8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="局部延长"
+        app:layout_constraintEnd_toStartOf="@+id/button9"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toEndOf="@+id/button7"
+        app:layout_constraintTop_toTopOf="@+id/button7"
+ />
+
+
+
+
+
     <Button
         android:id="@+id/button9"
         android:layout_width="wrap_content"
@@ -113,13 +130,4 @@
 
 
 
-    <Button
-        android:id="@+id/button8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        app:layout_constraintEnd_toStartOf="@+id/button9"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toEndOf="@+id/button7"
-        app:layout_constraintTop_toTopOf="@+id/button7" />
 </androidx.constraintlayout.widget.ConstraintLayout>

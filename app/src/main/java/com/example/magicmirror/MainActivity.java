@@ -124,6 +124,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void partLengthen(View view){
+        startActivity(new Intent(this, PartLengthenActivity.class));
+    }
 
 
 
