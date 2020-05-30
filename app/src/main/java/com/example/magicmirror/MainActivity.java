@@ -110,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
         new ImageUtils().adaptiveThresholdImage(this,baos.toByteArray());
     }
 
+
     //图像灰度化
     public void reduceImageColors(View view) {
         if(!isImageExsit()){
@@ -121,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
 //        new FaceUtils().beauty_face(this,baos.toByteArray());
         new ImageUtils().reduceImageColorsImage(this,baos.toByteArray());
     }
+
 
 
 

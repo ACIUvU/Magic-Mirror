@@ -11,6 +11,7 @@ public class ImageResource {
     private Bitmap medianFilter_img;
     private Bitmap adaptiveThreshold_img;
     private Bitmap reduceImageColors_img;
+    private Bitmap colorsGray_img;
 //    private DetectResponse detectResponse;//人脸分析结果
 
     private static ImageResource instance;
@@ -53,6 +54,9 @@ public class ImageResource {
     public  Bitmap getReduceImageColors_img() {
         return reduceImageColors_img;
     }
+    public  Bitmap getColorsGray_img(){
+        return colorsGray_img;
+    }
 
 
 
@@ -66,6 +70,10 @@ public class ImageResource {
     public void setMedianFilter_img(Bitmap medianFilter_img) { this.medianFilter_img = medianFilter_img; }
     public void setAdaptiveThreshold_img(Bitmap adaptiveThreshold_img) { this.adaptiveThreshold_img = adaptiveThreshold_img; }
     public void setReduceImageColors_img(Bitmap reduceImageColors_img) { this.reduceImageColors_img = reduceImageColors_img; }
+    public void setColorsGray_img(Bitmap colorsGray_img){
+        this. colorsGray_img =  colorsGray_img;
+    }
+
 
 /*    public DetectResponse getDetectResponse() {
         return detectResponse;
@@ -80,6 +88,10 @@ public class ImageResource {
     public void destory(){
         orig_img=null;
         cartoon_img=null;
+        medianFilter_img=null;
+        adaptiveThreshold_img=null;
+        reduceImageColors_img=null;
+        colorsGray_img=null;
  //       detectResponse=null;
     }
 }

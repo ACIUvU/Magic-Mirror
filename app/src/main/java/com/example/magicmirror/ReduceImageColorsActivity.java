@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -19,6 +20,7 @@ public class ReduceImageColorsActivity extends AppCompatActivity {
 
     private ImageView iv_reduceImageColors;
     private Bitmap reduceImageColors_img;
+    private Bitmap colorsGray_img;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,23 @@ public class ReduceImageColorsActivity extends AppCompatActivity {
         reduceImageColors_img = ImageResource.getInstance().getReduceImageColors_img();
         if(reduceImageColors_img!=null){
             iv_reduceImageColors.setImageBitmap(reduceImageColors_img);
+        }
+    }
+
+
+    public void colorsGray(View view) {
+
+        ByteArrayOutputStream baos=new ByteArrayOutputStream();
+        reduceImageColors_img.compress(Bitmap.CompressFormat.JPEG,80,baos);
+//        DetectResponse response=null;
+//        new FaceUtils().beauty_face(this,baos.toByteArray());
+        new ImageUtils().reduceImageColorsGray(this,baos.toByteArray());
+
+        //本来没注释
+        //Intent intent = getIntent();
+        colorsGray_img = ImageResource.getInstance().getColorsGray_img();
+        if(colorsGray_img!=null){
+            iv_reduceImageColors.setImageBitmap(colorsGray_img);
         }
     }
 

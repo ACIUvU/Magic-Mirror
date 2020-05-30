@@ -152,6 +152,28 @@ public class ImageUtils {
     }
 
 
+    //图像纯灰
+    public void reduceImageColorsGray(final AppCompatActivity activity, byte[] img){
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inScaled = false; // Leaving it to true enlarges the decoded image size.
+        Bitmap original = BitmapFactory.decodeByteArray(img,0,img.length,options);
+
+        Mat img1 = new Mat();
+        Utils.bitmapToMat(original, img1);
+
+        Imgproc.cvtColor(img1, img1, Imgproc.COLOR_BGR2GRAY);
+        Mat result = reduceColorsGray(img1, 5);
+
+        Bitmap imgBitmap = Bitmap.createBitmap(result.cols(), result.rows(), Bitmap.Config.ARGB_8888);
+        Utils.matToBitmap(result, imgBitmap);
+
+        ImageResource.getInstance().setColorsGray_img(imgBitmap);
+        Intent intent = new Intent();
+        intent.setClass(activity,ReduceImageColorsActivity.class);
+        //activity.startActivityForResult(intent,3);
+    }
+
+
 
     /*
     //对图片进行美颜和美白
@@ -218,6 +240,14 @@ public class ImageUtils {
 
         return img;
 
+    }
+
+    Mat reduceColorsGray(Mat img, int numColors) {
+        Mat LUT = createLUT(numColors);
+
+        LUT(img, LUT, img);
+
+        return img;
     }
 
 
