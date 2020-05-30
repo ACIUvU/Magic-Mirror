@@ -110,6 +110,19 @@ public class MainActivity extends AppCompatActivity {
         new ImageUtils().adaptiveThresholdImage(this,baos.toByteArray());
     }
 
+    //图像灰度化
+    public void reduceImageColors(View view) {
+        if(!isImageExsit()){
+            return;
+        }
+        ByteArrayOutputStream baos=new ByteArrayOutputStream();
+        img.compress(Bitmap.CompressFormat.JPEG,80,baos);
+//        DetectResponse response=null;
+//        new FaceUtils().beauty_face(this,baos.toByteArray());
+        new ImageUtils().reduceImageColorsImage(this,baos.toByteArray());
+    }
+
+
 
 
     @Override

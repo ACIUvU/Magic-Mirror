@@ -131,6 +131,26 @@ public class ImageUtils {
         activity.startActivityForResult(intent,3);
     }
 
+    //图像灰度化
+    public void reduceImageColorsImage(final AppCompatActivity activity, byte[] img){
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inScaled = false; // Leaving it to true enlarges the decoded image size.
+        Bitmap original = BitmapFactory.decodeByteArray(img,0,img.length,options);
+
+        Mat img1 = new Mat();
+        Utils.bitmapToMat(original, img1);
+
+        Mat result = reduceColors(img1, 180, 10, 5);
+
+        Bitmap imgBitmap = Bitmap.createBitmap(result.cols(), result.rows(), Bitmap.Config.ARGB_8888);
+        Utils.matToBitmap(result, imgBitmap);
+
+        ImageResource.getInstance().setReduceImageColors_img(imgBitmap);
+        Intent intent = new Intent();
+        intent.setClass(activity,ReduceImageColorsActivity.class);
+        activity.startActivityForResult(intent,3);
+    }
+
 
 
     /*
