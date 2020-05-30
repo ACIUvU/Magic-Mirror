@@ -1,12 +1,11 @@
 package com.example.magicmirror;
 
-//import androidx.annotation.Nullable;
-//import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+//import android.support.annotation.Nullable;
+//import android.support.v7.app.AppCompatActivity;
 
-import android.support.v7.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.content.ContentResolver;
@@ -33,8 +32,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+//import android.support.annotation.Nullable;
+//import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -112,6 +111,8 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
+
+
 
     //判断图片是否存在
     private Boolean isImageExsit(){

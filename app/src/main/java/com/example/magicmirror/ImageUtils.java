@@ -13,18 +13,21 @@ import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v7.app.AppCompatActivity;
+//import android.support.v7.app.AppCompatActivity;
 
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.magicmirror.R;
 
 import org.opencv.android.OpenCVLoader;
 import org.opencv.android.Utils;
 import org.opencv.core.Core;
+import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
@@ -47,25 +50,38 @@ import static org.opencv.core.CvType.CV_8UC1;
 public class ImageUtils {
 
 //    public void cartoonImage(View view) {
+
     public void cartoonImage(final AppCompatActivity activity, byte[] img) {
+        //关于options 没问题
         BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inScaled = false; // Leaving it to true enlarges the decoded image size.
+        options.inScaled = true; // Leaving it to true enlarges the decoded image size.
+        Bitmap original = BitmapFactory.decodeByteArray(img,0,img.length,options);
         //here！！！   part3！！
         //Bitmap original = BitmapFactory.decodeResource(getResources(), R.drawable.part3, options);
-        //32和32未定！
-        Bitmap original = BitmapFactory.decodeByteArray(img,0,img.length,options);
 
-        Mat img1 = new Mat();
-        Utils.bitmapToMat(original, img1);
+
+
+
+        Mat img1 = new Mat(original.getHeight(), original.getHeight(), CvType.CV_8UC4);
+        //Mat img1 = new Mat();
+       //                                                                                                                                                                                        Utils.bitmapToMat(original, img1);
+        /*
         Imgproc.cvtColor(img1, img1, Imgproc.COLOR_BGRA2BGR);
 
         Mat result = cartoon(img1, 80, 15, 10);
 
         Bitmap imgBitmap = Bitmap.createBitmap(result.cols(), result.rows(), Bitmap.Config.ARGB_8888);
         Utils.matToBitmap(result, imgBitmap);
+*/
 
 
-        ImageResource.getInstance().setCartoon_img(imgBitmap);
+
+        //test
+        //Bitmap imgBitmap = BitmapFactory.decodeByteArray(img,0,img.length, options);
+        ImageResource.getInstance().setCartoon_img(original);
+
+        //以下没问题
+        //ImageResource.getInstance().setCartoon_img(imgBitmap);
         Intent intent = new Intent();
         intent.setClass(activity,CartoonActivity.class);
         activity.startActivityForResult(intent,3);
@@ -74,6 +90,8 @@ public class ImageUtils {
         //imageView.setImageBitmap(imgBitmap);
         //saveBitmap(imgBitmap, "cartoon");
     }
+
+
 
     /*
     //对图片进行美颜和美白
@@ -165,6 +183,9 @@ public class ImageUtils {
         }
         return lookupTable;
     }
+
+
+
 }
 
 
