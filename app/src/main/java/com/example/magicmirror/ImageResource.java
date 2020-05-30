@@ -6,7 +6,8 @@ import android.graphics.Bitmap;
 //图片资源类
 public class ImageResource {
     private Bitmap orig_img;//原始图片
-    private Bitmap beauty_img;//美颜后的图片
+    //private Bitmap beauty_img;//美颜后的图片
+    private Bitmap cartoon_img;//美颜后的图片
 //    private DetectResponse detectResponse;//人脸分析结果
 
     private static ImageResource instance;
@@ -28,13 +29,23 @@ public class ImageResource {
         return orig_img;
     }
 
-    public  Bitmap getBeauty_img() {
-        return beauty_img;
+    //public  Bitmap getBeauty_img() {
+//        return beauty_img;
+ //   }
+
+    public  Bitmap getCartoon_img() {
+        return cartoon_img;
     }
 
-    public void setBeauty_img(Bitmap beauty_img) {
-        this.beauty_img = beauty_img;
+//    public void setBeauty_img(Bitmap beauty_img) {
+//        this.beauty_img = beauty_img;
+//    }
+
+
+    public void setCartoon_img(Bitmap cartoon_img) {
+        this.cartoon_img = cartoon_img;
     }
+
 
 /*    public DetectResponse getDetectResponse() {
         return detectResponse;
@@ -48,7 +59,7 @@ public class ImageResource {
 
     public void destory(){
         orig_img=null;
-        beauty_img=null;
+        cartoon_img=null;
  //       detectResponse=null;
     }
 }
