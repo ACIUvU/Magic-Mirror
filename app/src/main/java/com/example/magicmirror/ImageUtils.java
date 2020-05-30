@@ -84,7 +84,7 @@ public class ImageUtils {
 
 
 
-    //中值滤波器
+    //中值滤波器（朦胧质感）
     public void medianFilterImage(final AppCompatActivity activity, byte[] img) {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inScaled = false; // Leaving it to true enlarges the decoded image size.
@@ -108,22 +108,22 @@ public class ImageUtils {
     }
 
 
-    //图像阈值化
+    //图像阈值化（素描轮廓）
     public void adaptiveThresholdImage(final AppCompatActivity activity, byte[] img) {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inScaled = false; // Leaving it to true enlarges the decoded image size.
         Bitmap original = BitmapFactory.decodeByteArray(img,0,img.length,options);
 
+        Mat adaptiveTh = new Mat();
+        Utils.bitmapToMat(original, adaptiveTh);
+        Imgproc.cvtColor(adaptiveTh, adaptiveTh, Imgproc.COLOR_BGR2GRAY);
 
-        Mat img1 = new Mat();
-        Utils.bitmapToMat(original, img1);
-        Mat medianFilter = new Mat();
-        Imgproc.cvtColor(img1, medianFilter, Imgproc.COLOR_BGR2GRAY);
+        Imgproc.medianBlur(adaptiveTh, adaptiveTh, 15);
 
-        Imgproc.medianBlur(medianFilter, medianFilter, 15);
+        Imgproc.adaptiveThreshold(adaptiveTh, adaptiveTh, 255, Imgproc.ADAPTIVE_THRESH_MEAN_C, Imgproc.THRESH_BINARY, 9, 2);
 
-        Bitmap imgBitmap = Bitmap.createBitmap(medianFilter.cols(), medianFilter.rows(), Bitmap.Config.ARGB_8888);
-        Utils.matToBitmap(medianFilter, imgBitmap);
+        Bitmap imgBitmap = Bitmap.createBitmap(adaptiveTh.cols(), adaptiveTh.rows(), Bitmap.Config.ARGB_8888);
+        Utils.matToBitmap(adaptiveTh, imgBitmap);
 
         ImageResource.getInstance().setAdaptiveThreshold_img(imgBitmap);
         Intent intent = new Intent();
@@ -152,7 +152,7 @@ public class ImageUtils {
     }
 
 
-    //图像纯灰
+    //图像完全灰度化
     public void reduceImageColorsGray(final AppCompatActivity activity, byte[] img){
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inScaled = false; // Leaving it to true enlarges the decoded image size.
@@ -173,36 +173,6 @@ public class ImageUtils {
         //activity.startActivityForResult(intent,3);
     }
 
-
-
-    /*
-    //对图片进行美颜和美白
-    public void beauty_face(final AppCompatActivity activity, byte[] img){
-        HashMap<String, String> map = new HashMap<>();
-        faceApi.beautify(map, img, new IFacePPCallBack<BeautyResponse>() {
-            @Override
-            public void onSuccess(BeautyResponse beautyResponse) {
-                String error = beautyResponse.getError_message();
-                if(error!=null){
-                    Toast.makeText(activity,error,Toast.LENGTH_LONG).show();
-                    Log.e(TAG,error);
-                    return;
-                }
-                String result = beautyResponse.getResult();
-                byte[] decode = Base64.decode(result, Base64.DEFAULT);
-                ImageResource.getInstance().setBeauty_img(BitmapFactory.decodeByteArray(decode,0,decode.length));
-                Intent intent = new Intent();
-                intent.setClass(activity,BeautyActivity.class);
-                activity.startActivityForResult(intent,3);
-            }
-
-            @Override
-            public void onFailed(String s) {
-                Log.e(TAG, s);
-            }
-        });
-    }
-    */
 
 
     Mat cartoon(Mat img, int numRed, int numGreen, int numBlue) {
