@@ -108,6 +108,30 @@ public class ImageUtils {
     }
 
 
+    //图像阈值化
+    public void adaptiveThresholdImage(final AppCompatActivity activity, byte[] img) {
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inScaled = false; // Leaving it to true enlarges the decoded image size.
+        Bitmap original = BitmapFactory.decodeByteArray(img,0,img.length,options);
+
+
+        Mat img1 = new Mat();
+        Utils.bitmapToMat(original, img1);
+        Mat medianFilter = new Mat();
+        Imgproc.cvtColor(img1, medianFilter, Imgproc.COLOR_BGR2GRAY);
+
+        Imgproc.medianBlur(medianFilter, medianFilter, 15);
+
+        Bitmap imgBitmap = Bitmap.createBitmap(medianFilter.cols(), medianFilter.rows(), Bitmap.Config.ARGB_8888);
+        Utils.matToBitmap(medianFilter, imgBitmap);
+
+        ImageResource.getInstance().setAdaptiveThreshold_img(imgBitmap);
+        Intent intent = new Intent();
+        intent.setClass(activity,AdaptiveThresholdActivity.class);
+        activity.startActivityForResult(intent,3);
+    }
+
+
 
     /*
     //对图片进行美颜和美白

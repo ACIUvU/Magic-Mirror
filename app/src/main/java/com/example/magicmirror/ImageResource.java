@@ -9,6 +9,7 @@ public class ImageResource {
     //private Bitmap beauty_img;//美颜后的图片
     private Bitmap cartoon_img;//美颜后的图片
     private Bitmap medianFilter_img;
+    private Bitmap adaptiveThreshold_img;
 //    private DetectResponse detectResponse;//人脸分析结果
 
     private static ImageResource instance;
@@ -45,6 +46,9 @@ public class ImageResource {
     public  Bitmap getMedianFilter_img() {
         return medianFilter_img;
     }
+    public  Bitmap getAdaptiveThreshold_img() {
+        return adaptiveThreshold_img;
+    }
 
 
 
@@ -56,6 +60,7 @@ public class ImageResource {
     }
 
     public void setMedianFilter_img(Bitmap medianFilter_img) { this.medianFilter_img = medianFilter_img; }
+    public void setAdaptiveThreshold_img(Bitmap adaptiveThreshold_img) { this.adaptiveThreshold_img = adaptiveThreshold_img; }
 
 /*    public DetectResponse getDetectResponse() {
         return detectResponse;

@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    //卡通按钮点击事件
+    //图片中值滤波器按钮点击事件
     public void medianFilter(View view) {
         if(!isImageExsit()){
             return;
@@ -98,6 +98,17 @@ public class MainActivity extends AppCompatActivity {
         new ImageUtils().medianFilterImage(this,baos.toByteArray());
     }
 
+    //图片阈值化按钮点击事件
+    public void adaptiveThreshold(View view) {
+        if(!isImageExsit()){
+            return;
+        }
+        ByteArrayOutputStream baos=new ByteArrayOutputStream();
+        img.compress(Bitmap.CompressFormat.JPEG,80,baos);
+//        DetectResponse response=null;
+//        new FaceUtils().beauty_face(this,baos.toByteArray());
+        new ImageUtils().adaptiveThresholdImage(this,baos.toByteArray());
+    }
 
 
 
