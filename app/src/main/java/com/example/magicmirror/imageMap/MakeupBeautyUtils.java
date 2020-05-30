@@ -1,4 +1,4 @@
 package com.example.magicmirror.imageMap;
 
-public class MakeupBeatuy {
+public class MakeupBeautyUtils {
 }

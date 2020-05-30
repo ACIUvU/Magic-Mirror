@@ -128,6 +128,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, PartLengthenActivity.class));
     }
 
+    public void distortImage(View view) {
+        startActivity(new Intent(this,DistortImageAvtivity.class));
+    }
+
 
 
     @Override
