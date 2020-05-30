@@ -8,6 +8,7 @@ public class ImageResource {
     private Bitmap orig_img;//原始图片
     //private Bitmap beauty_img;//美颜后的图片
     private Bitmap cartoon_img;//美颜后的图片
+    private Bitmap medianFilter_img;
 //    private DetectResponse detectResponse;//人脸分析结果
 
     private static ImageResource instance;
@@ -41,11 +42,20 @@ public class ImageResource {
 //        this.beauty_img = beauty_img;
 //    }
 
+    public  Bitmap getMedianFilter_img() {
+        return medianFilter_img;
+    }
+
+
+
+
+
 
     public void setCartoon_img(Bitmap cartoon_img) {
         this.cartoon_img = cartoon_img;
     }
 
+    public void setMedianFilter_img(Bitmap medianFilter_img) { this.medianFilter_img = medianFilter_img; }
 
 /*    public DetectResponse getDetectResponse() {
         return detectResponse;

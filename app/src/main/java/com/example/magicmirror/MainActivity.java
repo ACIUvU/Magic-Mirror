@@ -86,6 +86,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    //卡通按钮点击事件
+    public void medianFilter(View view) {
+        if(!isImageExsit()){
+            return;
+        }
+        ByteArrayOutputStream baos=new ByteArrayOutputStream();
+        img.compress(Bitmap.CompressFormat.JPEG,80,baos);
+//        DetectResponse response=null;
+//        new FaceUtils().beauty_face(this,baos.toByteArray());
+        new ImageUtils().medianFilterImage(this,baos.toByteArray());
+    }
+
 
 
 

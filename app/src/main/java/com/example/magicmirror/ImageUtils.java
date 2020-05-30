@@ -59,22 +59,13 @@ public class ImageUtils {
         //here！！！   part3！！
         //Bitmap original = BitmapFactory.decodeResource(getResources(), R.drawable.part3, options);
 
-
-
-
         //Mat img1 = new Mat(original.getHeight(), original.getHeight(), CvType.CV_8UC4);
         Mat img1 = new Mat();
-                                                                                                                                                                                             Utils.bitmapToMat(original, img1);
-
+        Utils.bitmapToMat(original, img1);
         Imgproc.cvtColor(img1, img1, Imgproc.COLOR_BGRA2BGR);
-
         Mat result = cartoon(img1, 80, 15, 10);
-
         Bitmap imgBitmap = Bitmap.createBitmap(result.cols(), result.rows(), Bitmap.Config.ARGB_8888);
         Utils.matToBitmap(result, imgBitmap);
-
-
-
 
         //test
         //Bitmap imgBitmap = BitmapFactory.decodeByteArray(img,0,img.length, options);
@@ -89,6 +80,31 @@ public class ImageUtils {
         //ImageView imageView = findViewById(R.id.opencvImg);
         //imageView.setImageBitmap(imgBitmap);
         //saveBitmap(imgBitmap, "cartoon");
+    }
+
+
+
+    //中值滤波器
+    public void medianFilterImage(final AppCompatActivity activity, byte[] img) {
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inScaled = false; // Leaving it to true enlarges the decoded image size.
+        Bitmap original = BitmapFactory.decodeByteArray(img,0,img.length,options);
+
+
+        Mat img1 = new Mat();
+        Utils.bitmapToMat(original, img1);
+        Mat medianFilter = new Mat();
+        Imgproc.cvtColor(img1, medianFilter, Imgproc.COLOR_BGR2GRAY);
+
+        Imgproc.medianBlur(medianFilter, medianFilter, 15);
+
+        Bitmap imgBitmap = Bitmap.createBitmap(medianFilter.cols(), medianFilter.rows(), Bitmap.Config.ARGB_8888);
+        Utils.matToBitmap(medianFilter, imgBitmap);
+
+        ImageResource.getInstance().setMedianFilter_img(imgBitmap);
+        Intent intent = new Intent();
+        intent.setClass(activity,MedianFilterActivity.class);
+        activity.startActivityForResult(intent,3);
     }
 
 
