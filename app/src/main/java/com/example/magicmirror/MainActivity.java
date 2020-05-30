@@ -38,8 +38,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-
-
+import org.opencv.android.OpenCVLoader;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -53,7 +52,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        OpenCVLoader.initDebug();
+
         iv_show=findViewById(R.id.iv_show);
+
     }
 
     //拍照点击事件

@@ -62,26 +62,26 @@ public class ImageUtils {
 
 
 
-        Mat img1 = new Mat(original.getHeight(), original.getHeight(), CvType.CV_8UC4);
-        //Mat img1 = new Mat();
-       //                                                                                                                                                                                        Utils.bitmapToMat(original, img1);
-        /*
+        //Mat img1 = new Mat(original.getHeight(), original.getHeight(), CvType.CV_8UC4);
+        Mat img1 = new Mat();
+                                                                                                                                                                                             Utils.bitmapToMat(original, img1);
+
         Imgproc.cvtColor(img1, img1, Imgproc.COLOR_BGRA2BGR);
 
         Mat result = cartoon(img1, 80, 15, 10);
 
         Bitmap imgBitmap = Bitmap.createBitmap(result.cols(), result.rows(), Bitmap.Config.ARGB_8888);
         Utils.matToBitmap(result, imgBitmap);
-*/
+
 
 
 
         //test
         //Bitmap imgBitmap = BitmapFactory.decodeByteArray(img,0,img.length, options);
-        ImageResource.getInstance().setCartoon_img(original);
+        //ImageResource.getInstance().setCartoon_img(original);
 
         //以下没问题
-        //ImageResource.getInstance().setCartoon_img(imgBitmap);
+        ImageResource.getInstance().setCartoon_img(imgBitmap);
         Intent intent = new Intent();
         intent.setClass(activity,CartoonActivity.class);
         activity.startActivityForResult(intent,3);
