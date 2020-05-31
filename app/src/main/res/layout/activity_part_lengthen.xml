@@ -6,6 +6,7 @@
     android:orientation="vertical">
 
 
+    <!--对比用的layout-->
     <LinearLayout
         android:id="@+id/showPreview"
         android:layout_width="match_parent"
@@ -19,6 +20,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
+        <!--中间那条白线-->
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
@@ -29,21 +31,21 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1" />
-
     </LinearLayout>
 
+    <!--操作用的layout-->
     <FrameLayout
         android:id="@+id/showOperate"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <com.example.magicmirror.imageHandle.DistortImageView
-            android:id="@+id/smallFaceView"
+            android:id="@+id/distortimageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
         <com.example.magicmirror.imageHandle.AdjustLengthenView
-            android:id="@+id/longLegView"
+            android:id="@+id/adjustlengthenView"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

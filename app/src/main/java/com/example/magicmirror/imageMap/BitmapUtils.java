@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class BitmapUtils {
 
-    public static Bitmap getBitmapByAssetsName(Context context, String name){
+    public static Bitmap getBitmap_(Context context, String name){
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inPreferredConfig = Bitmap.Config.ARGB_8888;
         options.inMutable = true;
@@ -23,7 +23,7 @@ public class BitmapUtils {
         return null;
     }
 
-    public static Bitmap getBitmapByAssetsNameRGB(Context context, String name){
+    public static Bitmap getBitmap_RGB(Context context, String name){
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inPreferredConfig = Bitmap.Config.RGB_565;
         options.inMutable = true;

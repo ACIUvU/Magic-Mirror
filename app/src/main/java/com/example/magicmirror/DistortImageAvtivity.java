@@ -3,17 +3,12 @@ package com.example.magicmirror;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.magicmirror.imageHandle.DistortImageView;
-import com.example.magicmirror.imageMap.CommonShareBitmap;
-import com.example.magicmirror.imageMap.MakeupBeautyUtils;
 
 
 public class DistortImageAvtivity extends AppCompatActivity {

@@ -16,40 +16,40 @@ import com.example.magicmirror.imageHandle.LengthenUtils;
 import com.example.magicmirror.imageHandle.DistortImageView;
 import com.example.magicmirror.imageMap.BitmapUtils;
 
-/**
- * author:DingDeGao
- * time:2019-08-23-16:16
- * function: default function
- */
+
 public class PartLengthenActivity extends AppCompatActivity {
 
+    //准备操作的图
+    private Bitmap LengthenBitmap;
 
-    private AdjustLengthenView longLegView;
-
+    //操作前后两个按钮
     private ImageView img;
     private ImageView imgResult;
 
-    private DistortImageView smallFaceView;
-    private View showPreview;
-    private Button compare;
-    private View showOperate;
-    private Bitmap legBitmap;
+    //自定义视图（进行局部延长的操作视图）
+    private AdjustLengthenView adjustlengthenView;
+    private DistortImageView distortimageView;
 
+    //用作对比操作前后
+    private View showPreview;
+    private View showOperate;
+
+    //右上角对比按钮
+    private Button compare;
     private  boolean isShowCompare = false;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_part_lengthen);
-        longLegView = findViewById(R.id.longLegView);
-        smallFaceView = findViewById(R.id.smallFaceView);
-        showOperate = findViewById(R.id.showOperate);
 
-        imgResult = findViewById(R.id.imgResult);
         img = findViewById(R.id.img);
+        imgResult = findViewById(R.id.imgResult);
+        adjustlengthenView = findViewById(R.id.adjustlengthenView);
+        distortimageView = findViewById(R.id.distortimageView);
+        showOperate = findViewById(R.id.showOperate);
         showPreview = findViewById(R.id.showPreview);
-        smallFaceView = findViewById(R.id.smallFaceView);
 
         compare = findViewById(R.id.compare);
         compare.setOnClickListener(new View.OnClickListener() {
@@ -57,28 +57,29 @@ public class PartLengthenActivity extends AppCompatActivity {
             public void onClick(View v) {
                 isShowCompare = !isShowCompare;
                 compare.setText(isShowCompare?"返回":"对比");
-
-
                 loadImage();
             }
         });
-
 
         initData();
         loadImage();
     }
 
     private void initData() {
-        //legBitmap = BitmapUtils.getBitmapByAssetsName(this, "leg.jpeg");
-        legBitmap = ImageResource.getInstance().getOrig_img();
-        smallFaceView.setEnableOperate(false);
-        smallFaceView.setBitmap(legBitmap);
-        img.setImageBitmap(legBitmap);
+        //加载图片
+        LengthenBitmap = ImageResource.getInstance().getOrig_img();
+        img.setImageBitmap(LengthenBitmap);
 
-        smallFaceView.post(new Runnable() {
+        distortimageView.setEnableOperate(false);
+        distortimageView.setBitmap(LengthenBitmap);
+
+
+        //将Runnable添加到消息队列中；runnable将在用户界面线程上运行。
+        //public boolean post(Runnable action)
+        distortimageView.post(new Runnable() {
             @Override
             public void run() {
-                longLegView.setLineLimit(legBitmap.getHeight() * smallFaceView.getScale());
+                adjustlengthenView.setLineLimit(LengthenBitmap.getHeight() * distortimageView.getScale());
             }
         });
     }
@@ -89,7 +90,7 @@ public class PartLengthenActivity extends AppCompatActivity {
         showOperate.setVisibility(!isShowCompare?View.VISIBLE:View.GONE);
 
 
-        longLegView.setListener(new AdjustLengthenView.Listener() {
+        adjustlengthenView.setListener(new AdjustLengthenView.Listener() {
             @Override
             public void down() {
 
@@ -97,16 +98,16 @@ public class PartLengthenActivity extends AppCompatActivity {
 
             @Override
             public void up(Rect rect) {
-                int height1 = legBitmap.getHeight();
-                int height2 = smallFaceView.getHeight();
+                int height1 = LengthenBitmap.getHeight();
+                int height2 = distortimageView.getHeight();
 
                 float scale = (float) height1 /height2;
                 Rect rect1 = new Rect(0,(int)(rect.top * scale + 0.5f),
                         0,(int)(rect.bottom * scale+ 0.5f));
 
                 float strength = 0.2f;
-                Bitmap bitmap = LengthenUtils.longLeg(legBitmap, rect1, strength);
-                smallFaceView.setBitmap(bitmap);
+                Bitmap bitmap = LengthenUtils.longLeg(LengthenBitmap, rect1, strength);
+                distortimageView.setBitmap(bitmap);
                 imgResult.setImageBitmap(bitmap);
             }
         });

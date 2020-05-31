@@ -9,6 +9,8 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+
+//进行单点便宜操作的视图
 public class DistortImageView extends View{
 
     private int mWidth, mHeight;//View 的宽高
