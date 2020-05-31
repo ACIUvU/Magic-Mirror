@@ -33,8 +33,6 @@ public class DistortImageAvtivity extends AppCompatActivity {
         setContentView(R.layout.activity_distort_image);
 
 
-        //img = ImageResource.getInstance().getOrig_img();
-
 
         imgResult = findViewById(R.id.imgResult);
         img = findViewById(R.id.img);

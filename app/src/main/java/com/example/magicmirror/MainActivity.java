@@ -123,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     //相机=0；图库=1
+    //@Nullable用来标注方法可以传入null值，如果不可以则标注为Nonnull.
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

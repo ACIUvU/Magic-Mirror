@@ -27,8 +27,6 @@ public class AdaptiveThresholdActivity extends AppCompatActivity {
         setContentView(R.layout.activity_adaptive_threshold);
 
         iv_adaptiveThreshold=findViewById(R.id.iv_adaptiveThreshold);
-        //本来没注释
-        //Intent intent = getIntent();
         adaptiveThreshold_img = ImageResource.getInstance().getAdaptiveThreshold_img();
         if(adaptiveThreshold_img!=null){
             iv_adaptiveThreshold.setImageBitmap(adaptiveThreshold_img);

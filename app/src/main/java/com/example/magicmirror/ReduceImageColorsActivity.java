@@ -29,8 +29,6 @@ public class ReduceImageColorsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_reduce_image_colors);
 
         iv_reduceImageColors=findViewById(R.id.iv_reduceImageColors);
-        //本来没注释
-        //Intent intent = getIntent();
         reduceImageColors_img = ImageResource.getInstance().getReduceImageColors_img();
         if(reduceImageColors_img!=null){
             iv_reduceImageColors.setImageBitmap(reduceImageColors_img);
@@ -42,12 +40,8 @@ public class ReduceImageColorsActivity extends AppCompatActivity {
 
         ByteArrayOutputStream baos=new ByteArrayOutputStream();
         reduceImageColors_img.compress(Bitmap.CompressFormat.JPEG,80,baos);
-//        DetectResponse response=null;
-//        new FaceUtils().beauty_face(this,baos.toByteArray());
         new ImageUtils().reduceImageColorsGray(this,baos.toByteArray());
 
-        //本来没注释
-        //Intent intent = getIntent();
         colorsGray_img = ImageResource.getInstance().getColorsGray_img();
         if(colorsGray_img!=null){
             iv_reduceImageColors.setImageBitmap(colorsGray_img);

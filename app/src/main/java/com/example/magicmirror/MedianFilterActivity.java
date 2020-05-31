@@ -28,8 +28,7 @@ public class MedianFilterActivity extends AppCompatActivity {
         setTitle("中值滤波器");
         setContentView(R.layout.activity_median_filter);
         iv_medianFilter=findViewById(R.id.iv_medianFilter);
-        //本来没注释
-        //Intent intent = getIntent();
+
         medianFilter_img = ImageResource.getInstance().getMedianFilter_img();
         if(medianFilter_img!=null){
             iv_medianFilter.setImageBitmap(medianFilter_img);

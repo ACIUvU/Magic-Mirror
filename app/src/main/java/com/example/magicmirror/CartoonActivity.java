@@ -1,7 +1,7 @@
 package com.example.magicmirror;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
@@ -10,14 +10,14 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-//import android.support.annotation.Nullable;
-//import android.support.v7.app.AppCompatActivity;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.Random;
 
 public class CartoonActivity extends AppCompatActivity {
 
@@ -28,29 +28,73 @@ public class CartoonActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("卡通");
+        //相关联的xml
         setContentView(R.layout.cartoon_activity);
+
         iv_cartoon=findViewById(R.id.iv_cartoon);
-        //本来没注释
-        Intent intent = getIntent();
         cartoon_img = ImageResource.getInstance().getCartoon_img();
+
         if(cartoon_img!=null){
             iv_cartoon.setImageBitmap(cartoon_img);
         }
     }
 
-
+    /*
     public void saveImage(View view) {
-        File file = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        new ImageUtils().saveImageForAll(cartoon_img);
+    }
+*/
+
+
+
+
+
+    //存在问题
+    public void saveImage(View view) throws IOException {
+        File file1 = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        //String date = DateFormat.getDateInstance(DateFormat.DEFAULT).format(new Date());
+        //file=new File(file,date+".jpg");
+        //Toast.makeText(this,Environment.DIRECTORY_PICTURES,Toast.LENGTH_LONG).show();
+
+
         String date = DateFormat.getDateInstance(DateFormat.DEFAULT).format(new Date());
-        file=new File(file,date+".jpg");
+
+        //Toast.makeText(this,date,Toast.LENGTH_LONG).show();
+
+        Random random = new Random();
+        String fileName2 = String.valueOf(random.nextInt(Integer.MAX_VALUE));
+
+        //Toast.makeText(this,fileName2,Toast.LENGTH_LONG).show();
+        File file=new File(file1,fileName2+".jpg");
+
+        // File file=new File(file1,date+".jpg");
+
+      /*  if(file.exists()){
+            file.delete();
+        }
+        if(!file.exists()){
+            file.createNewFile();//重点在这里
+        }
+
+       */
+
+        Toast.makeText(this,file.getAbsolutePath(),Toast.LENGTH_LONG).show();
+
         try {
-            cartoon_img.compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(file));
+            FileOutputStream out = new FileOutputStream(file);
+            cartoon_img.compress(Bitmap.CompressFormat.JPEG, 100, out);
+            out.flush();
+            out.close();
             Toast.makeText(this,"保存成功",Toast.LENGTH_LONG).show();
         }catch (FileNotFoundException e){
             e.printStackTrace();
             Toast.makeText(this,"保存失败",Toast.LENGTH_LONG).show();
         }
     }
+
+
+
+
 
     @Override
     protected void onDestroy() {
@@ -60,47 +104,3 @@ public class CartoonActivity extends AppCompatActivity {
     }
 
 }
-
-
-
-/*
-    public void cartoonImage(View view) {
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inScaled = false; // Leaving it to true enlarges the decoded image size.
-        //here！！！   part3！！
-        Bitmap original = BitmapFactory.decodeResource(getResources(), R.drawable.part3, options);
-
-        Mat img1 = new Mat();
-        Utils.bitmapToMat(original, img1);
-        Imgproc.cvtColor(img1, img1, Imgproc.COLOR_BGRA2BGR);
-
-        Mat result = cartoon(img1, 80, 15, 10);
-
-        Bitmap imgBitmap = Bitmap.createBitmap(result.cols(), result.rows(), Bitmap.Config.ARGB_8888);
-        Utils.matToBitmap(result, imgBitmap);
-
-        ImageView imageView = findViewById(R.id.opencvImg);
-        imageView.setImageBitmap(imgBitmap);
-        saveBitmap(imgBitmap, "cartoon");
-    }
-
-
-    Mat cartoon(Mat img, int numRed, int numGreen, int numBlue) {
-        Mat reducedColorImage = reduceColors(img, numRed, numGreen, numBlue);
-
-        Mat result = new Mat();
-        Imgproc.cvtColor(img, result, Imgproc.COLOR_BGR2GRAY);
-        Imgproc.medianBlur(result, result, 15);
-
-        Imgproc.adaptiveThreshold(result, result, 255, Imgproc.ADAPTIVE_THRESH_MEAN_C, Imgproc.THRESH_BINARY, 15, 2);
-
-        Imgproc.cvtColor(result, result, Imgproc.COLOR_GRAY2BGR);
-
-        Log.d("PPP", result.height() + " " + result.width() + " " + reducedColorImage.type() + " " + result.channels());
-        Log.d("PPP", reducedColorImage.height() + " " + reducedColorImage.width() + " " + reducedColorImage.type() + " " + reducedColorImage.channels());
-
-        Core.bitwise_and(reducedColorImage, result, result);
-
-        return result;
-    }
- */
