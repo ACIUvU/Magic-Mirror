@@ -3,10 +3,6 @@ package com.example.magicmirror;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-//import android.support.annotation.Nullable;
-//import android.support.v7.app.AppCompatActivity;
-
-
 import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
@@ -23,26 +19,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 
 
-
-import android.app.AlertDialog;
-import android.content.ContentResolver;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.provider.MediaStore;
-//import android.support.annotation.Nullable;
-//import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
-
 import org.opencv.android.OpenCVLoader;
 
 
 public class MainActivity extends AppCompatActivity {
 
+    //主页面图片
     private ImageView iv_show;
     private Bitmap img;
 
@@ -52,19 +34,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //初始化OpenCV
         OpenCVLoader.initDebug();
 
+        //页面图片与UI绑定
         iv_show=findViewById(R.id.iv_show);
 
     }
 
-    //拍照点击事件
+    //相机事件
     public void takeImage(View view) {
         Intent intent=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent,0);
     }
 
-    //图库点击事件
+    //图库事件
     public void chooseImage(View view) {
         Intent intent=new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
@@ -79,10 +63,9 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         ByteArrayOutputStream baos=new ByteArrayOutputStream();
-        img.compress(Bitmap.CompressFormat.JPEG,80,baos);
-//        DetectResponse response=null;
-//        new FaceUtils().beauty_face(this,baos.toByteArray());
-          new ImageUtils().cartoonImage(this,baos.toByteArray());
+        img.compress(Bitmap.CompressFormat.JPEG,100,baos);
+        //图片处理流程
+        new ImageUtils().cartoonImage(this,baos.toByteArray());
     }
 
 
@@ -92,9 +75,8 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         ByteArrayOutputStream baos=new ByteArrayOutputStream();
-        img.compress(Bitmap.CompressFormat.JPEG,80,baos);
-//        DetectResponse response=null;
-//        new FaceUtils().beauty_face(this,baos.toByteArray());
+        img.compress(Bitmap.CompressFormat.JPEG,100,baos);
+        //图片处理流程
         new ImageUtils().medianFilterImage(this,baos.toByteArray());
     }
 
@@ -104,36 +86,43 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         ByteArrayOutputStream baos=new ByteArrayOutputStream();
-        img.compress(Bitmap.CompressFormat.JPEG,80,baos);
-//        DetectResponse response=null;
-//        new FaceUtils().beauty_face(this,baos.toByteArray());
+        img.compress(Bitmap.CompressFormat.JPEG,100,baos);
+        //图片处理流程
         new ImageUtils().adaptiveThresholdImage(this,baos.toByteArray());
     }
 
 
-    //图像灰度化
+    //图像灰度化按钮点击事件
     public void reduceImageColors(View view) {
         if(!isImageExsit()){
             return;
         }
         ByteArrayOutputStream baos=new ByteArrayOutputStream();
-        img.compress(Bitmap.CompressFormat.JPEG,80,baos);
-//        DetectResponse response=null;
-//        new FaceUtils().beauty_face(this,baos.toByteArray());
+        img.compress(Bitmap.CompressFormat.JPEG,100,baos);
+        //图片处理流程
         new ImageUtils().reduceImageColorsImage(this,baos.toByteArray());
     }
 
 
+    //局部延长处理页面
     public void partLengthen(View view){
+        if(!isImageExsit()){
+            return;
+        }
         startActivity(new Intent(this, PartLengthenActivity.class));
     }
 
+    //对点便宜页面
     public void distortImage(View view) {
+        if(!isImageExsit()){
+            return;
+        }
         startActivity(new Intent(this,DistortImageAvtivity.class));
     }
 
 
 
+    //相机=0；图库=1
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -172,7 +161,6 @@ public class MainActivity extends AppCompatActivity {
                     .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-
                         }
                     }).show();
             return false;
