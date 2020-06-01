@@ -107,7 +107,7 @@ public class PartLengthenActivity extends AppCompatActivity {
                         0,(int)(rect.bottom * scale+ 0.5f));
 
                 float strength = 0.2f;
-                Bitmap bitmap = LengthenUtils.longLeg(LengthenBitmap, rect1, strength);
+                Bitmap bitmap = LengthenUtils.lengthen_canvas(LengthenBitmap, rect1, strength);
                 distortimageView.setBitmap(bitmap);
                 imgResult.setImageBitmap(bitmap);
             }

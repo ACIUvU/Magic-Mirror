@@ -16,6 +16,7 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
+//调整局部延长的视图
 public class AdjustLengthenView extends View {
 
     private Paint paint = new Paint();
@@ -71,6 +72,7 @@ public class AdjustLengthenView extends View {
         initHeight();
     }
 
+    //延长区间标记线初始化
     private void initHeight() {
         if(measuredHeight == 0) {
             measuredHeight = getMeasuredHeight();
@@ -116,7 +118,7 @@ public class AdjustLengthenView extends View {
 
     float lastY;
 
-    //处理时间
+    //
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         float y = event.getY();

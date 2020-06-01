@@ -14,7 +14,8 @@ public class LengthenUtils {
          * @param strength   拉伸力度 [0.04f,0.10f]
          * @return 之后的图片
          */
-        public static Bitmap longLeg(Bitmap bitmap, Rect rect, float strength) {
+        //延长用的画布
+        public static Bitmap lengthen_canvas(Bitmap bitmap, Rect rect, float strength) {
             //将图像分成多少格
             int WIDTH = 200;
             int HEIGHT = 200;
@@ -44,8 +45,8 @@ public class LengthenUtils {
 
             int centerY = rect.centerY(),totalHeight = bitmap.getHeight();
             if(totalHeight < 5) return bitmap;
-            warpLeg(COUNT,verts,centerY,totalHeight,rect.height(),strength);
-            warpLeg(COUNT,verts,centerY,totalHeight,rect.height(),strength);
+            warpLengthen(COUNT,verts,centerY,totalHeight,rect.height(),strength);
+            warpLengthen(COUNT,verts,centerY,totalHeight,rect.height(),strength);
 
             Bitmap resultBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
             Canvas canvas = new Canvas(resultBitmap);
@@ -53,7 +54,8 @@ public class LengthenUtils {
             return resultBitmap;
         }
 
-        private static void warpLeg(int COUNT, float verts[], float centerY,int totalHeight,float region,float strength) {
+        //延长算法
+        private static void warpLengthen(int COUNT, float verts[], float centerY,int totalHeight,float region,float strength) {
 
             float  r = region / 2; //缩放区域力度
 
