@@ -13,7 +13,6 @@ public class DistortImageUtils {
     private static final int HEIGHT = 200;
 
     /**
-     * 瘦脸算法
      *
      * @param bitmap      原来的bitmap
      * @return 之后的图片

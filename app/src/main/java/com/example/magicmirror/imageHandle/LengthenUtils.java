@@ -9,8 +9,6 @@ import android.graphics.Rect;
 
 public class LengthenUtils {
         /**
-         * 大长腿算法
-         *
          * @param bitmap 原来的bitmap
          * @param rect   拉伸区域
          * @param strength   拉伸力度 [0.04f,0.10f]

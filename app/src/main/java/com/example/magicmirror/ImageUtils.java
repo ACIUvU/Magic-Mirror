@@ -100,6 +100,7 @@ public class ImageUtils {
         //图像的中心元素将替换为内核区域中所有像素的中值，ksize为内核区域
         Imgproc.medianBlur(adaptiveTh, adaptiveTh, 15);
 
+        //图像阈值化；javadoc: adaptiveThreshold(src, dst, maxValue, adaptiveMethod, thresholdType, blockSize, C)
         Imgproc.adaptiveThreshold(adaptiveTh, adaptiveTh, 255, Imgproc.ADAPTIVE_THRESH_MEAN_C, Imgproc.THRESH_BINARY, 9, 2);
 
         Bitmap imgBitmap = Bitmap.createBitmap(adaptiveTh.cols(), adaptiveTh.rows(), Bitmap.Config.ARGB_8888);
@@ -158,26 +159,35 @@ public class ImageUtils {
 
 
 
-    Mat cartoon(Mat img, int numRed, int numGreen, int numBlue) {
-        Mat reducedColorImage = reduceColors(img, numRed, numGreen, numBlue);
+    private Mat cartoon(Mat img, int numRed, int numGreen, int numBlue) {
 
+        //准备工作
+        Mat reducedColorImage = reduceColors(img, numRed, numGreen, numBlue);
         Mat result = new Mat();
+
+        //转换色彩空间cvtColor(source, destination, Color_Conversion_Code)
         Imgproc.cvtColor(img, result, Imgproc.COLOR_BGR2GRAY);
+
+        //图像的中心元素将替换为内核区域中所有像素的中值，ksize为内核区域
         Imgproc.medianBlur(result, result, 15);
 
+        //图像阈值化；javadoc: adaptiveThreshold(src, dst, maxValue, adaptiveMethod, thresholdType, blockSize, C)
         Imgproc.adaptiveThreshold(result, result, 255, Imgproc.ADAPTIVE_THRESH_MEAN_C, Imgproc.THRESH_BINARY, 15, 2);
 
+        //转换色彩空间cvtColor(source, destination, Color_Conversion_Code)
         Imgproc.cvtColor(result, result, Imgproc.COLOR_GRAY2BGR);
 
+        //记录信息
         Log.d("PPP", result.height() + " " + result.width() + " " + reducedColorImage.type() + " " + result.channels());
         Log.d("PPP", reducedColorImage.height() + " " + reducedColorImage.width() + " " + reducedColorImage.type() + " " + reducedColorImage.channels());
 
+        //使用位“与”运算；javadoc: bitwise_and(src1, src2, dst)
         Core.bitwise_and(reducedColorImage, result, result);
 
         return result;
     }
 
-    Mat reduceColors(Mat img, int numRed, int numGreen, int numBlue) {
+    private Mat reduceColors(Mat img, int numRed, int numGreen, int numBlue) {
         Mat redLUT = createLUT(numRed);
         Mat greenLUT = createLUT(numGreen);
         Mat blueLUT = createLUT(numBlue);
@@ -195,7 +205,7 @@ public class ImageUtils {
 
     }
 
-    Mat reduceColorsGray(Mat img, int numColors) {
+    private Mat reduceColorsGray(Mat img, int numColors) {
         Mat LUT = createLUT(numColors);
 
         LUT(img, LUT, img);
@@ -204,7 +214,7 @@ public class ImageUtils {
     }
 
 
-    Mat createLUT(int numColors) {
+    private Mat createLUT(int numColors) {
         // When numColors=1 the LUT will only have 1 color which is black.
         if (numColors < 0 || numColors > 256) {
             System.out.println("Invalid Number of Colors. It must be between 0 and 256 inclusive.");

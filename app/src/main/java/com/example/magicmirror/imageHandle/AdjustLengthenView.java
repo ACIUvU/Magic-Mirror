@@ -104,7 +104,7 @@ public class AdjustLengthenView extends View {
         textPaint.setAntiAlias(true);
         textPaint.setColor(Color.BLUE);
         textPaint.setTextSize(dipToPixels(getContext(),16));
-        tipStr = "此区域为选中区域";
+        tipStr = "垂直延长区域";
     }
 
     public static float dipToPixels(Context context, float dipValue) {
@@ -116,6 +116,7 @@ public class AdjustLengthenView extends View {
 
     float lastY;
 
+    //处理时间
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         float y = event.getY();
