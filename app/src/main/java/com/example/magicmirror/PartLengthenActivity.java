@@ -42,6 +42,7 @@ public class PartLengthenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("局部延长");
         setContentView(R.layout.activity_part_lengthen);
 
         img = findViewById(R.id.img);

@@ -40,6 +40,7 @@ public class AdaptiveThresholdActivity extends AppCompatActivity {
         File file = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         String date = DateFormat.getDateInstance(DateFormat.DEFAULT).format(new Date());
         file=new File(file,date+".jpg");
+        Toast.makeText(this,file.getAbsolutePath(),Toast.LENGTH_LONG).show();
         try {
             adaptiveThreshold_img.compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(file));
             Toast.makeText(this,"保存成功",Toast.LENGTH_LONG).show();

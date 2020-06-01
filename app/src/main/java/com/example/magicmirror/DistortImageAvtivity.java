@@ -25,6 +25,7 @@ public class DistortImageAvtivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("对点偏移");
         setContentView(R.layout.activity_distort_image);
 
 
